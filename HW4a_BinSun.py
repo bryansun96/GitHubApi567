@@ -1,56 +1,31 @@
-""" author: Bin Sun
-This is a program that take the Github user id as input and output the list of repositories of the user
-with the total number of commits
 """
-import ssl
-import sys
-import json
+Take as input a GitHub user ID.
+The output from the function will be a list of the names of the repositories that the user has,
+along with the number of commits that are in each of the listed repositories.
+Like "
+Repo: Triangle567 Number of commits: 10
+Repo: Square567 Number of commits: 27
+"
+"""
 import requests
-from math import pi, cos, sin, asin, sqrt
 
-# ignore SSL certificate errors
-ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
+def result(username):
+    """ Take a user ID.
+        The output from the function will be a list of the names of the repositories that the user has,
+        along with the number of commits that are in each of the listed repositories.
+    """
+    list_ = list()
+    request = requests.get(f'https://api.github.com/users/{username}/repos')
+    json = request.json()
+    for i in range(0,len(json)):
+        repo_name = json[i]['name']
+        commits = requests.get(f'https://api.github.com/repos/{username}/{repo_name}/commits')
+        list_.append(f"Repo: {repo_name} Number of commits: {len(commits.json())}")
 
-
-def get_repo(userid):
-    """ Function to get the data using the API """
-
-    url = 'https://api.github.com/users/' + userid + '/repos'
-    data = requests.get(url).text
-    data = json.loads(data)  # get and load data from the url
-    repos = []
-
-    for repo in data:
-        try:
-            repos.append(repo["name"])
-        except Exception as e:
-            print(e)  # catch the exception when the repo cannot be found (or other cases)
-            sys.exit()
-
-    return repos
-
-
-def get_commits(userid, repo):
-    """ Function to get the commits of given repo """
-
-    url = "https://api.github.com/repos/" + userid + "/" + repo + "/commits"
-    data = requests.get(url).text
-    data = json.loads(data)  # get and load data from the url
-    commits = len(data)
-    return commits
+    return list_
 
 
 def main():
-    """ The main function to get the input from the user """
-
-    userid = input("Please enter the user id: ")
-    repos = get_repo(userid)
-    for repo in repos:
-        commits = get_commits(userid, repo)
-        print(f"Repo: {repo} Number of commits: {commits}")
-
-
-if __name__ == '__main__':
-    main()
+    """ Get an input username and print result(username)"""
+    username = input("Enter the github username: ")
+    print(result(username))
