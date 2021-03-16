@@ -2,7 +2,7 @@
 These are the test cases
 """
 import unittest
-from HW4a_BinSun import get_repo, get_commits
+from HW05a_Mocking import get_repo, get_commits
 from unittest.mock import MagicMock as Mock, patch
 
 class TestHW4a(unittest.TestCase):
