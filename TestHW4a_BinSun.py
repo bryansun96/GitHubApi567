@@ -7,6 +7,7 @@ from unittest.mock import MagicMock as Mock, patch
 
 class TestHW4a(unittest.TestCase):
     """ Test cases for HW4a """
+    @patch('HW4a_BinSun.get_repo')
 
     def test_correct_result(self):
         """ test case for checking results of valid user name """
