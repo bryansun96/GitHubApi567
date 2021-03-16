@@ -20,12 +20,6 @@ class TestHW4a(unittest.TestCase):
         self.assertEqual(repos[3], "Mocks")
         self.assertEqual(repos[4], "Project1")
 
-        """self.assertEqual(get_commits("richkempinski", repos[0]), 2)
-        self.assertEqual(get_commits("richkempinski", repos[1]), 30)
-        self.assertEqual(get_commits("richkempinski", repos[2]), 6)
-        self.assertEqual(get_commits("richkempinski", repos[3]), 10)
-        self.assertEqual(get_commits("richkempinski", repos[4]), 2)
-        """
 
     def test_special_cases(self):
         """ Test cases for invalid input """
