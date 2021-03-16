@@ -2,12 +2,13 @@
 These are the test cases
 """
 import unittest
-from HW05a_Mocking import get_repo, get_commits
+from HW4a_BinSun import get_repo, get_commits
 from unittest.mock import MagicMock as Mock, patch
 
 class TestHW4a(unittest.TestCase):
     """ Test cases for HW4a """
     @patch('HW4a_BinSun.get_repo')
+    @patch('HW4a_BinSun.get_commits')
 
     def test_correct_result(self,repos,get_commits):
         """ test case for checking results of valid user name """
