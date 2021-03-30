@@ -12,6 +12,7 @@ class TestHW4a(unittest.TestCase):
 
     def test_correct_result(self,repos,get_commits):
         """ test case for checking results of valid user name """
+        Mocktest.return_value.json.return_value = ('richkempinski')
 
         repos = get_repo("richkempinski")
         self.assertEqual(len(repos), 9)
